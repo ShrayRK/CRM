@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCRM } from "../context/CRMContext";
 import { Link } from "react-router-dom";
 import "./AddLead.css";
+import { toast } from "react-toastify";
 
 export const AddLead = () => {
   const { agents, createLead, agentsError } = useCRM();
@@ -31,7 +32,7 @@ export const AddLead = () => {
       !formData.salesAgentId ||
       !formData.timeToClose
     ) {
-      alert("Please fill all the fields");
+      toast.error("Please fill all the fields");
       return;
     }
 

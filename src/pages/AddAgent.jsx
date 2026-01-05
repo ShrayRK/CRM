@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCRM } from "../context/CRMContext";
 import "./AddAgent.css";
+import { toast } from "react-toastify";
 
 export const AddAgent = () => {
   const { createAgent, agentsError } = useCRM();
@@ -25,7 +26,7 @@ export const AddAgent = () => {
     event.preventDefault();
 
     if (!formData.name || !formData.email) {
-      return alert("Please fill all the fields");
+      return toast.error("Please fill all the fields");
     }
 
     try {

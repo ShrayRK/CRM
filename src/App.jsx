@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CRMProvider } from './context/CRMContext';
+import { ToastContainer } from 'react-toastify';
 
 import { Home } from "./pages/Home";
 import { LeadDetails } from "./pages/LeadDetails";
@@ -30,8 +31,14 @@ function App() {
             <Route path="sales" element={<SalesAgentView />} />
             <Route path="settings" element={<LeadStatusView />} />
             <Route path="/leads/status/:status" element={<FilteredLeads />} />
-            <Route path="/leads/:name/edit" element={<EditLead />} />
+            <Route path="/leads/:name/edit" element={<EditLead />} /> 
           </Routes>
+          <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        pauseOnHover
+      />
         </Router>
       </CRMProvider>
     </div>

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import useFetch from '../useFetch';
+import { toast } from "react-toastify";
 
 const CRMContext = createContext();
 
@@ -78,16 +79,27 @@ const deleteComment = async (commentId) => {
 
   const createLead = async (leadData) => {
     try {
-         await fetch('https://crm-backend-blush-ten.vercel.app/leads', {
+      setActionLoading(true);
+
+      const res = await fetch(
+        'https://crm-backend-blush-ten.vercel.app/leads', 
+        {
            method: 'POST',
            headers: {
               'Content-Type': 'application/json',
            },
            body: JSON.stringify(leadData),
-     });
-     alert("Lead created successfully!");
+        });
+
+        if (!res.ok) {
+           throw new Error("Failed to create lead");
+          }
+
+     toast.success("Lead created successfully!");
+     refetchLeads();
     } catch (error) {
      console.log('Error creating lead:',error);
+     toast.error("Failed to create lead.")
      throw error;
     } finally {
      setActionLoading(false);
@@ -104,7 +116,7 @@ const deleteComment = async (commentId) => {
       },
       body: JSON.stringify(leadData),
      });
-     alert("Lead updated successfully!");
+     toast.success("Lead updated successfully!");
      refetchLeads();
     } catch (error) {
       console.error('Error updating lead:', error);
@@ -120,7 +132,7 @@ const deleteComment = async (commentId) => {
       await fetch(`https://crm-backend-blush-ten.vercel.app/leads/${id}`, {
         method: 'DELETE',
       });
-      alert("Lead deleted successfully!");
+      toast.success("Lead deleted successfully!");
       refetchLeads();
     } catch (error) {
       console.error('Error deleting lead:', error);
@@ -139,7 +151,7 @@ const deleteComment = async (commentId) => {
         },
         body: JSON.stringify(agentData),
       });
-      alert("Agent created successfully!");
+      toast.success("Agent created successfully!");
     } catch (error) {
       console.error('Error creating agent:', error);
       throw error;
