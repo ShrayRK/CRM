@@ -1,4 +1,4 @@
-.lead-settings-page {
+/* .lead-settings-page {
   min-height: 100vh;
   padding: 24px;
   background-color: black;
@@ -135,5 +135,173 @@
 
   .lead-settings-sidebar {
     display: none;
+  }
+} */
+
+/* Layout same grid as Home */
+.settings-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 60px auto;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 2rem auto;
+  margin-left: 2rem;
+  border: 5px dashed white;
+  border-radius: 20px;
+  color: white;
+}
+
+/* Header */
+.settings-header {
+  grid-column: 1 / -1;
+  border-bottom: 5px dashed white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+/* Sidebar */
+.settings-sidebar {
+  border-right: 5px dashed white;
+  padding: 20px;
+}
+
+.settings-sidebar h3 {
+  margin-bottom: 10px;
+  border-bottom: 5px dashed white;
+  padding-bottom: 6px;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.settings-sidebar li {
+  padding: 8px 0;
+  border-bottom: 2px dashed white;
+}
+
+.settings-sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+.settings-sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+.settings-main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* Box style (same as crm-box) */
+.settings-box {
+  border-top: 4px dashed white;
+  padding: 20px 30px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.settings-box h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Row */
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed white;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+/* Text */
+.muted {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Buttons (reuse home style) */
+.settings-btn {
+  padding: 8px 16px;
+  background: transparent;
+  color: white;
+  border: 2px dashed white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.settings-btn:hover:not(:disabled) {
+  background: white;
+  color: black;
+}
+
+.settings-btn.danger:hover:not(:disabled) {
+  background: crimson;
+  color: white;
+}
+
+.settings-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Loading */
+.settings-loading {
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive (same breakpoints as Home) */
+@media (max-width: 768px) {
+  .settings-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto auto;
+    margin: 1rem;
+  }
+
+  .settings-sidebar {
+    border-right: none;
+    border-bottom: 5px dashed white;
+    display: flex;
+    gap: 20px;
+  }
+
+  .settings-sidebar h3 {
+    display: none;
+  }
+
+  .settings-sidebar ul {
+    display: flex;
+    gap: 16px;
+  }
+
+  .settings-sidebar li {
+    border-bottom: none;
+    white-space: nowrap;
+  }
+
+  .settings-box {
+    padding: 16px;
   }
 }

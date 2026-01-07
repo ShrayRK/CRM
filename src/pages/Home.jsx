@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useCRM } from "../context/CRMContext";
@@ -14,11 +14,20 @@ export const Home = () => {
     agentsError,
   } = useCRM();
 
+  const [selectedStatus, setSelectedStatus] = useState("");
+
   const navigate = useNavigate();
 
   const handleStatusFilter = (status) => {
-    navigate(`/leads/status/${status}`);
+    // navigate(`/leads/status/${status}`);
+    setSelectedStatus(status);
   };
+
+  const clearFilter = () => setSelectedStatus("");
+
+  const filteredLeads = selectedStatus 
+  ? leads.filter((lead) => lead.status === selectedStatus)
+  : leads;
 
   if (loading) return <div style={{ color: "white", padding: "20px" }}>Loading...</div>;
   if (leadsError || agentsError) return <div style={{ color: "white", padding: "20px" }}>Error: {leadsError || agentsError}</div>;
@@ -48,10 +57,10 @@ export const Home = () => {
         </section>
 
         <section className="crm-box">
-          <h3>Leads</h3>
+          <h3>Leads {selectedStatus && `(Status: ${selectedStatus})`}</h3>
           {leads?.length > 0 ? (
             <ul className="lead-list-inline">
-              {leads.slice(0, 3).map((lead) => (
+              {filteredLeads.slice(0, 5).map((lead) => (
                 <li key={lead._id}>
                   <Link to={`/leads/${lead.name}`} className="lead-link">
                     {lead.name}
@@ -63,7 +72,8 @@ export const Home = () => {
             <p>No leads available</p>
           )}
 
-          <p style={{ marginTop: "40px", marginBottom: "0%", fontSize: "20px" }}>Total Leads: {leads?.length || 0}</p>
+          <p style={{ marginTop: "40px", marginBottom: "0%", fontSize: "20px" }}>{selectedStatus ? 
+          `Showing: ${filteredLeads.length} / ${leads.length}` : `Total Leads: ${leads.length}`}</p>
         </section>
 
         <section className="crm-box">
@@ -84,6 +94,8 @@ export const Home = () => {
           <button onClick={() => handleStatusFilter("Qualified")}>Qualified</button>
           <button onClick={() => handleStatusFilter("Priority")}>Priority</button>
           <button onClick={() => handleStatusFilter("Closed")}>Closed</button>
+          <br /><br />
+          <button onClick={clearFilter}>Clear Filter</button>
           <br /><br />
           <Link to="/addLead" className="add-lead-link">Add Lead</Link>
         </section>

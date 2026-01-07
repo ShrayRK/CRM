@@ -12,6 +12,7 @@ export const CRMProvider = ({ children }) => {
     salesAgentId: '',
     status: '',
     source: '',
+    priority: '',
     tags: [],
   });
 
@@ -25,7 +26,8 @@ export const CRMProvider = ({ children }) => {
   const {
     data: agents,
     loading: agentsLoading,
-    error: agentsError,      
+    error: agentsError,
+    refetch: refetchAgents,      
   } = useFetch('https://crm-backend-blush-ten.vercel.app/agents',[]);
 
   const getCommentsByLead = async (leadId) => {
@@ -152,13 +154,44 @@ const deleteComment = async (commentId) => {
         body: JSON.stringify(agentData),
       });
       toast.success("Agent created successfully!");
+      refetchAgents();
     } catch (error) {
       console.error('Error creating agent:', error);
       throw error;
     }finally {
       setActionLoading(false);
     }
-  };   
+  };
+  
+      const deleteAgent = async (id) => {
+    try {
+      setActionLoading(true);
+      const res = await fetch(`https://crm-backend-blush-ten.vercel.app/agents/${id}`, {
+        method: 'DELETE',
+      });
+      console.log(id);
+      const text = await res.text();
+      let data;
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        data = {};
+      }
+      if(!res.ok){
+        toast.error(data.error || "Agent not found.");
+        return;
+      }
+      
+      console.log(deleteAgent);
+      toast.success("Agent deleted successfully!");
+      refetchAgents();
+    } catch (error) {
+      toast.error("Failed to delte agent");
+      console.error('Error deleting agent:', error);
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   const value = {
     leads: Array.isArray(leads) ? leads : [],
@@ -170,6 +203,7 @@ const deleteComment = async (commentId) => {
     updateLead,
     deleteLead,
     createAgent,
+    deleteAgent,
     getCommentsByLead,
     addComment,
     deleteComment,

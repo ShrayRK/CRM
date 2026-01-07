@@ -27,6 +27,12 @@ const SalesAgentView = () => {
       );
     }
 
+    if (filters.priority) {
+      result = result.filter(
+        lead => lead.priority === filters.priority
+      );
+    }
+
     if (filters.sort === "timeToCloseAsc") {
       result = [...result].sort(
         (a,b) => a.timeToClose - b.timeToClose
@@ -80,10 +86,25 @@ const SalesAgentView = () => {
           >
             <option value="">All</option>
             <option value="New">New</option>
-            <option value="Contacted">Conctacted</option>
+            <option value="Contacted">Contacted</option>
             <option value="Qualified">Qualified</option>
             <option value="Priority">Priority</option>
             <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Priority</label>
+          <select
+            value={filters.priority}
+            onChange={e =>
+              setFilters({ ...filters, priority: e.target.value })
+            }
+          >
+            <option value="">All</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
 
@@ -124,6 +145,7 @@ const SalesAgentView = () => {
                 </div>
                 <div>Status: <span>{lead.status}</span></div>
                 <div>Source: {lead.source}</div>
+                <div>Priority: {lead.priority}</div>
                 <div>Agent: {lead.salesAgentId?.name || "Unassigned"}</div>
                 <div>Time to Close: {lead.timeToClose} Days</div>
               </div>
