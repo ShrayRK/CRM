@@ -160,7 +160,6 @@
   font-size: 20px;
 }
 
-/* Sidebar */
 .settings-sidebar {
   border-right: 5px dashed white;
   padding: 20px;
@@ -233,6 +232,7 @@
 }
 
 .settings-btn {
+  margin-left: 70px;
   padding: 8px 16px;
   background: transparent;
   color: white;
@@ -249,8 +249,8 @@
 }
 
 .settings-btn.danger:hover:not(:disabled) {
-  background: crimson;
-  color: white;
+  background: white;
+  color: black;
 }
 
 .settings-btn:disabled {
@@ -294,5 +294,34 @@
 
   .settings-box {
     padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    margin: 0.5rem;
+  }
+
+  .settings-header {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .settings-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .settings-btn {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .settings-box {
+    padding: 14px;
   }
 }
