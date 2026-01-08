@@ -130,7 +130,6 @@ const LeadSettings = () => {
 
       <main className="settings-main">
 
-        {/* LEADS */}
         <section className="settings-box">
           <h3>All Leads</h3>
 
@@ -156,7 +155,6 @@ const LeadSettings = () => {
           )}
         </section>
 
-        {/* AGENTS */}
         <section className="settings-box">
           <h3>All Agents</h3>
 

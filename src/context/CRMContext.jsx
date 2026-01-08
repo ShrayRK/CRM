@@ -21,19 +21,19 @@ export const CRMProvider = ({ children }) => {
     loading: leadsLoading,
     error: leadsError,
     refetch: refetchLeads,      
-  } = useFetch('https://crm-backend-blush-ten.vercel.app/leads',[]);
+  } = useFetch('https://crm-backend-lovat-six.vercel.app/leads',[]);
 
   const {
     data: agents,
     loading: agentsLoading,
     error: agentsError,
     refetch: refetchAgents,      
-  } = useFetch('https://crm-backend-blush-ten.vercel.app/agents',[]);
+  } = useFetch('https://crm-backend-lovat-six.vercel.app/agents',[]);
 
   const getCommentsByLead = async (leadId) => {
     try {
       const res = await fetch (
-        `https://crm-backend-blush-ten.vercel.app/leads/${leadId}/comments`
+        `https://crm-backend-lovat-six.vercel.app/leads/${leadId}/comments`
       );
       return await res.json();
     } catch (error) {
@@ -46,7 +46,7 @@ export const CRMProvider = ({ children }) => {
     try {
       setActionLoading(true);
       await fetch(
-        `https://crm-backend-blush-ten.vercel.app/leads/${leadId}/comments`,
+        `https://crm-backend-lovat-six.vercel.app/leads/${leadId}/comments`,
         {
           method: "POST",
           headers: {"Content-Type" : "application/json"},
@@ -65,7 +65,7 @@ const deleteComment = async (commentId) => {
   try {
     setActionLoading(true);
     await fetch(
-      `https://crm-backend-blush-ten.vercel.app/comments/${commentId}`,
+      `https://crm-backend-lovat-six.vercel.app/comments/${commentId}`,
       {
         method: "DELETE",
       }
@@ -84,7 +84,7 @@ const deleteComment = async (commentId) => {
       setActionLoading(true);
 
       const res = await fetch(
-        'https://crm-backend-blush-ten.vercel.app/leads', 
+        'https://crm-backend-lovat-six.vercel.app/leads', 
         {
            method: 'POST',
            headers: {
@@ -111,7 +111,7 @@ const deleteComment = async (commentId) => {
   const updateLead = async (id, leadData) => {
     try {
      setActionLoading(true);
-     await fetch(`https://crm-backend-blush-ten.vercel.app/leads/${id}`, {
+     await fetch(`https://crm-backend-lovat-six.vercel.app/leads/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ const deleteComment = async (commentId) => {
   const deleteLead = async (id) => {
     try {
       setActionLoading(true);
-      await fetch(`https://crm-backend-blush-ten.vercel.app/leads/${id}`, {
+      await fetch(`https://crm-backend-lovat-six.vercel.app/leads/${id}`, {
         method: 'DELETE',
       });
       toast.success("Lead deleted successfully!");
@@ -146,7 +146,7 @@ const deleteComment = async (commentId) => {
 
   const createAgent = async (agentData) => {
     try {
-      await fetch('https://crm-backend-blush-ten.vercel.app/agents', {
+      await fetch('https://crm-backend-lovat-six.vercel.app/agents', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const deleteComment = async (commentId) => {
       const deleteAgent = async (id) => {
     try {
       setActionLoading(true);
-      const res = await fetch(`https://crm-backend-blush-ten.vercel.app/agents/${id}`, {
+      const res = await fetch(`https://crm-backend-lovat-six.vercel.app/agents/${id}`, {
         method: 'DELETE',
       });
       console.log(id);
