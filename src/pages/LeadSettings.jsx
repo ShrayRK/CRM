@@ -165,7 +165,6 @@ const LeadSettings = () => {
               <div key={agent._id} className="settings-row">
                 <div>
                   <strong>{agent.name}</strong>
-                  <div className="muted">{agent.email}</div>
                 </div>
 
                 <button
