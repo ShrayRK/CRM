@@ -181,8 +181,6 @@ const deleteComment = async (commentId) => {
         toast.error(data.error || "Agent not found.");
         return;
       }
-      
-      console.log(deleteAgent);
       toast.success("Agent deleted successfully!");
       refetchAgents();
     } catch (error) {
