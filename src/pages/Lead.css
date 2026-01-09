@@ -1,75 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* background: radial-gradient(circle at top, #1a1a1a, #000); */
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
 .lead-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 70px 1fr;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 64px 1fr;
   grid-template-areas:
     "header header"
     "sidebar main";
-  background-color: #000;
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  margin: 2rem auto;
-  margin-left: 2rem;
+
+  max-width: 1400px;
+  width: calc(100% - 48px);
+  margin: 24px auto;
+
+  border-radius: 22px;
+  border: 3px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
 }
 
 .lead-header {
   grid-area: header;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 0 24px;
+  justify-content: center;
   font-size: 22px;
   font-weight: 600;
-  border-bottom: 4px dashed white;
+  letter-spacing: 1.5px;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .lead-sidebar {
   grid-area: sidebar;
-  padding: 24px 16px;
-  border-right: 4px dashed white;
+  padding: 24px 20px;
+  border-right: 2px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .lead-sidebar-link {
   display: block;
-  padding: 12px 14px;
-  border: 2px dashed white;
-  border-radius: 10px;
-  background-color: #111;
-  color: #fff;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
   text-decoration: none;
   font-size: 14px;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  transition: all 0.25s ease;
 }
 
 .lead-sidebar-link:hover {
-  background-color: white;
-  border-color: white;
-  color: #000;
+  background: white;
+  color: black;
+  transform: translateX(6px);
 }
 
 .lead-main {
   grid-area: main;
-  padding: 24px;
-  display: grid;
-  gap: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
 }
 
 .lead-box {
-  padding: 20px;
-  border-radius: 16px;
-  border: 4px dashed white;
-  background-color: #050505;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+
+  padding: 22px 28px;
+  border-radius: 18px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+}
+
+.lead-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
 }
 
 .lead-overview h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
 }
 
 .lead-overview p {
   font-size: 14px;
-  color: white;
+  opacity: 0.85;
 }
 
 .lead-ul {
@@ -82,43 +121,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
+
+  padding: 14px 18px;
   margin-bottom: 12px;
-  border-radius: 12px;
-  border: 2px dashed white;
-  background-color: black;
+  border-radius: 14px;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.7);
+
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .lead-item:hover {
-  background-color: black;
-  border-color: #fff;
+  background: white;
+  color: black;
+}
+
+.lead-item:hover a {
+  color: black;
 }
 
 .lead-name {
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.lead-name a{
-  color: #fff;
+.lead-name a {
+  color: white;
+  text-decoration: none;
 }
 
 .lead-meta {
   font-size: 12px;
-  color: white;
+  opacity: 0.8;
 }
 
-.lead-empty {
-  text-align: center;
-  color: white;
-  font-size: 14px;
-}
-
+.lead-empty,
 .lead-state {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.75;
   padding: 24px;
-  color: #fff;
-  background-color: #000;
+}
+
+.lead-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lead-main::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
 }
 
 @media (max-width: 900px) {
@@ -131,5 +182,9 @@
 
   .lead-sidebar {
     display: none;
+  }
+
+  .lead-box {
+    max-width: 100%;
   }
 }

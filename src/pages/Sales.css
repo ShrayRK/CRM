@@ -1,70 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+  /* background: radial-gradient(circle at top, #1a1a1a, #000); */
+  font-family: "Inter", sans-serif;
+  color: white;
   overflow-x: hidden;
 }
 
 .sales-agent-page {
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: 250px 1fr;
-  min-height: 75vh;
-  border: 5px dashed white;
-  border-radius: 20px;
-  margin: 1.5rem;
-  padding: 1.5rem;
-  color: white;
+  grid-template-columns: 260px 1fr;
+
+  max-width: 1400px;
+  width: calc(100% - 48px);
+  margin: 24px auto;
+
+  padding: 0;
+  border-radius: 22px;
+  border: 3px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
 }
 
 .sidebar {
-  border-right: 4px dashed white;
-  padding: 20px;
+  padding: 24px 20px;
+  border-right: 2px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .sidebar h3 {
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 3px dashed white;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
+  letter-spacing: 1.4px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.35);
+  opacity: 0.9;
 }
 
 .sales-sidebar-link {
   padding: 12px 16px;
-  border: 2px dashed white;
-  border-radius: 12px;
-  background-color: #0a0a0a;
-  color: #fff;
+  border-radius: 14px;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
   text-align: center;
+  transition: all 0.25s ease;
 }
 
 .sales-sidebar-link:hover {
-  border-color: #fff;
+  background: white;
   color: black;
-  background-color: white;
+  transform: translateX(6px);
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .filter-group label {
   font-size: 13px;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .filter-group select {
   background: transparent;
   color: white;
-  padding: 6px 8px;
-  border: 2px dashed white;
-  border-radius: 6px;
+  padding: 8px 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
   outline: none;
   cursor: pointer;
 }
@@ -75,17 +94,19 @@ html, body {
 }
 
 .agent-content {
-  padding: 20px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
 }
 
 .agent-content h2 {
   text-align: center;
-  letter-spacing: 1px;
-  border-bottom: 3px dashed white;
+  letter-spacing: 1.4px;
+  font-size: 20px;
   padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.35);
 }
 
 .agent-name {
@@ -98,35 +119,68 @@ html, body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .lead-card {
-  border: 3px dashed white;
-  padding: 14px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
+  border-radius: 18px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+
+  transition: all 0.25s ease;
+}
+
+.lead-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
 }
 
 .lead-card span {
   font-weight: 600;
+  letter-spacing: 0.4px;
 }
 
 .loading,
 .empty {
   text-align: center;
-  opacity: 0.8;
+  font-size: 14px;
+  opacity: 0.75;
+  padding: 24px;
 }
 
-@media (max-width: 768px) {
+.agent-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.agent-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
   .sales-agent-page {
     grid-template-columns: 1fr;
   }
 
   .sidebar {
     border-right: none;
-    border-bottom: 4px dashed white;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.35);
+  }
+
+  .lead-list {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-content {
+    padding: 18px;
   }
 }
