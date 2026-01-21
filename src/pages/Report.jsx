@@ -10,28 +10,26 @@ const Reports = () => {
   const { leads, agents, loading } = useCRM();
 
   if (loading) {
-    return <div className="reports-loading">Loading reports...</div>;
+    return <div className="reports__state">Loading reports...</div>;
   }
 
   return (
-    <div className="reports-page">
+    <div className="reports">
       <header className="reports__header">
         <h2>CRM Reports</h2>
       </header>
 
       <div className="reports__body">
         <aside className="reports__sidebar">
-                  <h3>Navigation</h3>
-                  <ul>
-                    <li><Link to="/">
-           Dashboard
-        </Link></li>
-                  </ul>
-                </aside>
+          <h3>Navigation</h3>
+          <ul>
+            <li>
+              <Link to="/">Dashboard</Link>
+            </li>
+          </ul>
+        </aside>
 
-        <main className="reports-content">
-        <div className="reports-grid">
-
+        <main className="reports__main">
           <section className="report-card">
             <h3>Total Leads: Closed vs Pipeline</h3>
             <div className="chart-wrapper">
@@ -46,15 +44,13 @@ const Reports = () => {
             </div>
           </section>
 
-          <section className="report-card full-width">
+          <section className="report-card report-card--full">
             <h3>Lead Status Distribution</h3>
             <div className="chart-wrapper">
               <LeadStatusChart leads={leads} />
             </div>
           </section>
-
-        </div>
-      </main>
+        </main>
       </div>
     </div>
   );
