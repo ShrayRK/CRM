@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#845EC2'];
 
@@ -15,7 +15,8 @@ const LeadStatusChart = ({ leads }) => {
   }));
 
   return (
-    <PieChart width={350} height={300}>
+    <ResponsiveContainer width="100%" height="100%">
+    <PieChart>
       <Pie
         data={data}
         dataKey="value"
@@ -31,6 +32,7 @@ const LeadStatusChart = ({ leads }) => {
       <Tooltip />
       <Legend />
     </PieChart>
+    </ResponsiveContainer>
   );
 };
 

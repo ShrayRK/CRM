@@ -9,41 +9,52 @@ import "./Report.css";
 const Reports = () => {
   const { leads, agents, loading } = useCRM();
 
-  if (loading) return <p className="loading">Loading reports...</p>;
+  if (loading) {
+    return <div className="reports-loading">Loading reports...</div>;
+  }
 
   return (
     <div className="reports-page">
-      <div className="reports-container">
-        <div className="reports-header">
-          CRM Reports
-        </div>
+      <header className="reports__header">
+        <h2>CRM Reports</h2>
+      </header>
 
-        <aside className="reports-sidebar">
-          <Link to="/" className="reports-sidebar-link">
-            ← Back to Dashboard
-          </Link>
-        </aside>
+      <div className="reports__body">
+        <aside className="reports__sidebar">
+                  <h3>Navigation</h3>
+                  <ul>
+                    <li><Link to="/">
+           Dashboard
+        </Link></li>
+                  </ul>
+                </aside>
 
-        <main className="reports-main">
-          <div className="report-grid">
-            <div className="report-card">
-              <h3>Total Leads: Closed vs Pipeline</h3>
+        <main className="reports-content">
+        <div className="reports-grid">
+
+          <section className="report-card">
+            <h3>Total Leads: Closed vs Pipeline</h3>
+            <div className="chart-wrapper">
               <LeadsPipelinePie leads={leads} />
             </div>
+          </section>
 
-            <div className="report-card">
-              <h3>Leads Closed by Sales Agent</h3>
-               <div className="chart-wrapper">
-                    <LeadsByAgentBar leads={leads} agents={agents} />
-               </div>
+          <section className="report-card">
+            <h3>Leads Closed by Sales Agent</h3>
+            <div className="chart-wrapper">
+              <LeadsByAgentBar leads={leads} agents={agents} />
             </div>
+          </section>
 
-            <div className="report-card">
-              <h3>Lead Status Distribution</h3>
+          <section className="report-card full-width">
+            <h3>Lead Status Distribution</h3>
+            <div className="chart-wrapper">
               <LeadStatusChart leads={leads} />
             </div>
-          </div>
-        </main>
+          </section>
+
+        </div>
+      </main>
       </div>
     </div>
   );

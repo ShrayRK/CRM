@@ -27,11 +27,7 @@ export const AddLead = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.salesAgentId ||
-      !formData.timeToClose
-    ) {
+    if (!formData.name || !formData.salesAgentId || !formData.timeToClose) {
       toast.error("Please fill all the fields");
       return;
     }
@@ -62,27 +58,24 @@ export const AddLead = () => {
 
   return (
     <div className="add-lead-page">
-      <div className="add-lead-container">
+      <header className="add-lead-header">
+        <h2>Create New Lead</h2>
+        <nav>
+          <Link to="/"> Dashboard</Link>
+        </nav>
+      </header>
 
-        <header className="add-lead-header">
-          Create New Lead
-        </header>
+      <main className="add-lead-main">
+        <section className="add-lead-card">
+          <h3>Lead Details</h3>
 
-        <aside className="add-lead-sidebar">
-          <Link to="/" className="back-link">
-            ← Back to Dashboard
-          </Link>
-        </aside>
-
-        <main className="add-lead-main">
-          <form className="add-lead-form" onSubmit={handleSubmit}>
-
-            <div className="form-group">
+          <form onSubmit={handleSubmit}>
+            <div className="field">
               <label>Lead Name</label>
               <input name="name" value={formData.name} onChange={handleChange} />
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Lead Source</label>
               <select name="source" value={formData.source} onChange={handleChange}>
                 <option>Website</option>
@@ -94,7 +87,7 @@ export const AddLead = () => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Sales Agent</label>
               <select
                 name="salesAgentId"
@@ -111,7 +104,7 @@ export const AddLead = () => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Status</label>
               <select name="status" value={formData.status} onChange={handleChange}>
                 <option>New</option>
@@ -122,16 +115,20 @@ export const AddLead = () => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Priority</label>
-              <select name="priority" value={formData.priority} onChange={handleChange}>
+              <select
+                name="priority"
+                value={formData.priority}
+                onChange={handleChange}
+              >
                 <option>High</option>
                 <option>Medium</option>
                 <option>Low</option>
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Time to Close (Days)</label>
               <input
                 type="number"
@@ -141,7 +138,7 @@ export const AddLead = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="field">
               <label>Tags</label>
               <input
                 name="tags"
@@ -151,14 +148,12 @@ export const AddLead = () => {
               />
             </div>
 
-            <button className="submit-btn" disabled={loading}>
+            <button disabled={loading}>
               {loading ? "Creating..." : "Create Lead"}
             </button>
-
           </form>
-        </main>
-
-      </div>
+        </section>
+      </main>
     </div>
   );
 };

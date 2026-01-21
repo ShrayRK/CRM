@@ -4,155 +4,165 @@ import { useCRM } from "../context/CRMContext";
 import "./Sales.css";
 
 const SalesAgentView = () => {
-  const {
-    leads,
-    agents,
-    filters,
-    setFilters,
-    loading,
-  } = useCRM();
+  const { leads, agents, filters, setFilters, loading } = useCRM();
 
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
     if (filters.salesAgentId) {
       result = result.filter(
-        lead => lead.salesAgentId?._id === filters.salesAgentId
+        (lead) => lead.salesAgentId?._id === filters.salesAgentId
       );
     }
 
     if (filters.status) {
-      result = result.filter(
-        lead => lead.status === filters.status
-      );
+      result = result.filter((lead) => lead.status === filters.status);
     }
 
     if (filters.priority) {
-      result = result.filter(
-        lead => lead.priority === filters.priority
-      );
+      result = result.filter((lead) => lead.priority === filters.priority);
     }
 
     if (filters.sort === "timeToCloseAsc") {
-      result = [...result].sort(
-        (a,b) => a.timeToClose - b.timeToClose
-      );
+      result = [...result].sort((a, b) => a.timeToClose - b.timeToClose);
     }
 
     if (filters.sort === "timeToCloseDes") {
-      result = [...result].sort(
-        (a,b) =>b.timeToClose - a.timeToClose
-      );
+      result = [...result].sort((a, b) => b.timeToClose - a.timeToClose);
     }
 
     return result;
   }, [leads, filters]);
 
-  if (loading) return <p className="loading">Loading...</p>;
+  if (loading) return <div className="sales__state">Loading...</div>;
 
   return (
-    <div className="sales-agent-page">
-      <aside className="sidebar">
-        <h3>Sidebar</h3>
+    <div className="sales">
+      <header className="sales__header">
+        <h2>Sales View</h2>
+      </header>
 
-        <Link to="/" className="sales-sidebar-link">
-            ← Back to Dashboard
+      <div className="sales__body">
+        <aside className="sales__sidebar">
+          <h3>Filters</h3>
+
+         <ul>
+          <li>
+             <Link to="/">
+             Dashboard
           </Link>
+          </li>
+         </ul>
 
-        <div className="filter-group">
-          <label>Sales Agent</label>
-          <select
-            value={filters.salesAgentId}
-            onChange={e =>
-              setFilters({ ...filters, salesAgentId: e.target.value })
-            }
-          >
-            <option value="">All Agents</option>
-            {agents.map(agent => (
-              <option key={agent._id} value={agent._id}>
-                {agent.name}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="sales__filter">
+            <label>Sales Agent</label>
+            <select
+              value={filters.salesAgentId}
+              onChange={(e) =>
+                setFilters({ ...filters, salesAgentId: e.target.value })
+              }
+            >
+              <option value="">All Agents</option>
+              {agents.map((agent) => (
+                <option key={agent._id} value={agent._id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="filter-group">
-          <label>Status</label>
-          <select
-            value={filters.status}
-            onChange={e =>
-              setFilters({ ...filters, status: e.target.value })
-            }
-          >
-            <option value="">All</option>
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Qualified">Qualified</option>
-            <option value="Priority">Priority</option>
-            <option value="Closed">Closed</option>
-          </select>
-        </div>
+          <div className="sales__filter">
+            <label>Status</label>
+            <select
+              value={filters.status}
+              onChange={(e) =>
+                setFilters({ ...filters, status: e.target.value })
+              }
+            >
+              <option value="">All</option>
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Qualified">Qualified</option>
+              <option value="Priority">Priority</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
 
-        <div className="filter-group">
-          <label>Priority</label>
-          <select
-            value={filters.priority}
-            onChange={e =>
-              setFilters({ ...filters, priority: e.target.value })
-            }
-          >
-            <option value="">All</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
+          <div className="sales__filter">
+            <label>Priority</label>
+            <select
+              value={filters.priority}
+              onChange={(e) =>
+                setFilters({ ...filters, priority: e.target.value })
+              }
+            >
+              <option value="">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
 
-        <div className="filter-group">
-          <label>Sort By</label>
-          <select
-            onChange={e =>
-              setFilters({ ...filters, sort: e.target.value })
-            }
-          >
-            <option value="">None</option>
-            <option value="timeToCloseAsc">Time to Close Ascending</option>
-            <option value="timeToCloseDes">Time to Close Descending</option>
-          </select>
-        </div>
-      </aside>
+          <div className="sales__filter">
+            <label>Sort By</label>
+            <select
+              value={filters.sort}
+              onChange={(e) =>
+                setFilters({ ...filters, sort: e.target.value })
+              }
+            >
+              <option value="">None</option>
+              <option value="timeToCloseAsc">Time to Close ↑</option>
+              <option value="timeToCloseDes">Time to Close ↓</option>
+            </select>
+          </div>
+        </aside>
 
-      <main className="agent-content">
-        <h2>Leads by Sales Agent</h2>
+        <main className="sales__main">
+          <section className="dashboard-card sales__list-card">
+            <header className="dashboard-card__header">
+              <h3>
+                Leads
+                {filters.salesAgentId &&
+                  ` — ${
+                    agents.find(
+                      (a) => a._id === filters.salesAgentId
+                    )?.name
+                  }`}
+              </h3>
+            </header>
 
-        {filters.salesAgentId && (
-          <h4 className="agent-name">
-            Sales Agent:{" "}
-            {
-              agents.find(a => a._id === filters.salesAgentId)?.name
-            }
-          </h4>
-        )}
+            <div className="dashboard-card__content">
+              {filteredLeads.length === 0 ? (
+                <p className="muted">No leads found</p>
+              ) : (
+                <ul className="sales__list">
+                  {filteredLeads.map((lead, index) => (
+                    <li key={lead._id} className="sales__item">
+                      <div className="sales__title">
+                        Lead {index + 1} — {lead.name}
+                      </div>
 
-        <div className="lead-list">
-          {filteredLeads.length === 0 ? (
-            <p className="empty">No leads found</p>
-          ) : (
-            filteredLeads.map((lead, index) => (
-              <div key={lead._id} className="lead-card">
-                <div>
-                  <strong>Lead {index + 1} - {lead.name}</strong>
-                </div>
-                <div>Status: <span>{lead.status}</span></div>
-                <div>Source: {lead.source}</div>
-                <div>Priority: {lead.priority}</div>
-                <div>Agent: {lead.salesAgentId?.name || "Unassigned"}</div>
-                <div>Time to Close: {lead.timeToClose} Days</div>
-              </div>
-            ))
-          )}
-        </div>
-      </main>
+                      <div className="sales__meta">
+                        <span>Status: {lead.status}</span>
+                        <span>Priority: {lead.priority}</span>
+                        <span>Source: {lead.source}</span>
+                        <span>
+                          Agent:{" "}
+                          {lead.salesAgentId?.name || "Unassigned"}
+                        </span>
+                        <span>
+                          Time to Close: {lead.timeToClose} days
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   );
 };

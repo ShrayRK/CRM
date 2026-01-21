@@ -14,16 +14,13 @@ export const AddAgent = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!formData.name || !formData.email) {
       return toast.error("Please fill all the fields");
@@ -32,6 +29,7 @@ export const AddAgent = () => {
     try {
       setLoading(true);
       await createAgent(formData);
+      toast.success("Agent added successfully");
       setFormData({ name: "", email: "" });
     } catch (error) {
       console.error(error);
@@ -41,27 +39,23 @@ export const AddAgent = () => {
   };
 
   return (
-    <div className="add-agent-page">
-      <div className="add-agent-container">
-        <header className="add-agent-header">
-          Add Sales Agent
-        </header>
+    <div className="add-agent">
+      <header className="add-agent__header">
+        <h2>Add Sales Agent</h2>
+        <nav>
+          <Link to="/">Dashboard</Link>
+          <Link to="/agents">Agents</Link>
+        </nav>
+      </header>
 
-        <aside className="add-agent-sidebar">
-          <Link to="/" className="add-agent-sidebar-link">
-            ← Back to Dashboard
-          </Link>
-
-          <Link to="/agents" className="add-agent-sidebar-link">
-             ← Back to Agents
-          </Link>
-        </aside>
-
-        <main className="add-agent-main">
-          <section className="add-agent-box">
+      <main className="add-agent__main">
+        <section className="dashboard-card add-agent__card">
+          <header className="dashboard-card__header">
             <h3>Agent Details</h3>
+          </header>
 
-            <form className="add-agent-form" onSubmit={handleSubmit}>
+          <div className="dashboard-card__content">
+            <form className="add-agent__form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Agent Name</label>
                 <input
@@ -88,17 +82,13 @@ export const AddAgent = () => {
                 <p className="form-error">{agentsError}</p>
               )}
 
-              <button
-                className="submit-btn"
-                type="submit"
-                disabled={loading}
-              >
+              <button type="submit" disabled={loading}>
                 {loading ? "Saving..." : "Add Agent"}
               </button>
             </form>
-          </section>
-        </main>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };

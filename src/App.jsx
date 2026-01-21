@@ -12,12 +12,11 @@ import { AddLead } from './pages/AddLead';
 import Reports from './pages/Report';
 import SalesAgentView from './pages/Sales';
 import LeadStatusView from './pages/LeadSettings';
-import FilteredLeads from './pages/LeadByStatus';
 import EditLead from './pages/EditLead';
 
 function App() {
   return (
-    <div className="App" style={{ backgroundColor: 'black', minHeight: '100vh', color: 'white' }}>
+    <div className="app">
       <CRMProvider>
         <Router>
           <Routes>
@@ -30,7 +29,6 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="sales" element={<SalesAgentView />} />
             <Route path="settings" element={<LeadStatusView />} />
-            <Route path="/leads/status/:status" element={<FilteredLeads />} />
             <Route path="/leads/:name/edit" element={<EditLead />} /> 
           </Routes>
           <ToastContainer
