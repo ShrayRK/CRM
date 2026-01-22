@@ -42,13 +42,17 @@ export const AddAgent = () => {
     <div className="add-agent">
       <header className="add-agent__header">
         <h2>Add Sales Agent</h2>
-        <nav>
-          <Link to="/">Dashboard</Link>
-          <Link to="/agents">Agents</Link>
-        </nav>
       </header>
 
-      <main className="add-agent__main">
+      <div className="add-agent__body">
+        <aside className="home__sidebar">
+          <h3>Navigation</h3>
+          <ul>
+            <li><Link to="/">Dashboard</Link></li>
+            <li><Link to="/agents">Agents</Link></li>
+          </ul>
+        </aside>
+        <main className="add-agent__main">
         <section className="dashboard-card add-agent__card">
           <header className="dashboard-card__header">
             <h3>Agent Details</h3>
@@ -89,6 +93,7 @@ export const AddAgent = () => {
           </div>
         </section>
       </main>
+      </div>
     </div>
   );
 };

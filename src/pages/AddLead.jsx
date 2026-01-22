@@ -60,14 +60,20 @@ export const AddLead = () => {
     <div className="add-lead-page">
       <header className="add-lead-header">
         <h2>Create New Lead</h2>
-        <nav>
-          <Link to="/"> Dashboard</Link>
-        </nav>
       </header>
 
-      <main className="add-lead-main">
+     <div className="add-lead-body">
+      <aside className="add-lead-sidebar">
+        <h3>Navigation</h3>
+        <ul>
+          <li><Link to="/">Dashboard</Link></li>
+        </ul>
+      </aside>
+       <main className="add-lead-main">
         <section className="add-lead-card">
-          <h3>Lead Details</h3>
+          <header className="add-lead-card-header">
+            <h3>Lead Details</h3>
+          </header>
 
           <form onSubmit={handleSubmit}>
             <div className="field">
@@ -154,6 +160,7 @@ export const AddLead = () => {
           </form>
         </section>
       </main>
+     </div>
     </div>
   );
 };

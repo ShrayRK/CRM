@@ -48,15 +48,21 @@ const EditLead = () => {
     <div className="edit-lead-page">
       <header className="edit-lead-header">
         <h2>Edit Lead</h2>
-        <nav>
-          <Link to="/">Dashboard</Link>
-          <Link to={`/leads/${lead.name}`}>Lead</Link>
-        </nav>
       </header>
 
-      <main className="edit-lead-main">
+        <div className="edit-lead-body">
+          <aside className="edit-lead-sidebar">
+            <h3>Navigation</h3>
+            <ul>
+              <li><Link to="/">Dashboard</Link></li>
+              <li><Link to={`/leads/${lead.name}`}>Lead</Link></li>
+            </ul>
+          </aside>
+               <main className="edit-lead-main">
         <section className="edit-lead-card">
-          <h3>Lead Details</h3>
+          <header className="edit-lead-card-header">
+            <h3>Lead Details</h3>
+          </header>
 
           <form onSubmit={handleSubmit}>
             <div className="field">
@@ -129,6 +135,7 @@ const EditLead = () => {
           </form>
         </section>
       </main>
+        </div>
     </div>
   );
 };
