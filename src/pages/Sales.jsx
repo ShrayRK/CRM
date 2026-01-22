@@ -83,7 +83,7 @@ const SalesAgentView = () => {
               <option value="New">New</option>
               <option value="Contacted">Contacted</option>
               <option value="Qualified">Qualified</option>
-              <option value="Priority">Priority</option>
+              <option value="Proposal Sent">Proposal Sent</option>
               <option value="Closed">Closed</option>
             </select>
           </div>

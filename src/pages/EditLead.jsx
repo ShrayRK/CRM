@@ -76,6 +76,7 @@ const EditLead = () => {
                 <option>New</option>
                 <option>Contacted</option>
                 <option>Qualified</option>
+                <option>Proposal Sent</option>
                 <option>Closed</option>
               </select>
             </div>

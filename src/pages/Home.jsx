@@ -86,7 +86,7 @@ export const Home = () => {
               <h3>Lead Status</h3>
             </header>
             <div className="dashboard-card__content home__stats">
-              {["New", "Contacted", "Qualified", "Priority", "Closed"].map(
+              {["New", "Contacted", "Qualified", "Proposal Sent", "Closed"].map(
                 (status) => (
                   <div key={status} className="home__stat">
                     <span>{status}</span>
@@ -105,7 +105,7 @@ export const Home = () => {
             </header>
             <div className="dashboard-card__content">
               <div className="home__actions">
-                {["New", "Contacted", "Qualified", "Priority", "Closed"].map(
+                {["New", "Contacted", "Qualified", "Proposal Sent", "Closed"].map(
                   (status) => (
                     <button
                       key={status}
