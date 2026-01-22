@@ -29,7 +29,6 @@ export const AddAgent = () => {
     try {
       setLoading(true);
       await createAgent(formData);
-      toast.success("Agent added successfully");
       setFormData({ name: "", email: "" });
     } catch (error) {
       console.error(error);
